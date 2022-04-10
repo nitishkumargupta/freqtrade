@@ -265,6 +265,9 @@ def get_datahandlerclass(datatype: str) -> Type[IDataHandler]:
     elif datatype == 'hdf5':
         from .hdf5datahandler import HDF5DataHandler
         return HDF5DataHandler
+    elif datatype == 'csv':
+        from .csvdatahandler import CSVDataHandler
+        return CSVDataHandler
     else:
         raise ValueError(f"No datahandler for datatype {datatype} available.")
 
