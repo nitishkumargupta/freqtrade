@@ -62,7 +62,10 @@ class CSVDataHandler(IDataHandler):
         filename = self._pair_to_filename_without_underscore(self._datadir, pair, timeframe)
         _data = data.copy()
         # Convert date to int
-        _data['date'] = _data['date'].view(np.int64) // 1000 // 1000
+        parsed_date = to_datetime(_data['date'])
+        date = parsed_date.dt.strftime('%Y%m%d')
+        # _data['date'] = _data['date'].view(np.int64) // 1000 // 1000 # Default date
+        _data['date'] = date
 
         # Reset index, select only appropriate columns and save as json
         _data.loc[:, self._columns].to_csv(
