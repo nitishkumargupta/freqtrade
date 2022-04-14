@@ -6,7 +6,7 @@ Besides the Live-Trade and Dry-Run run modes, the `backtesting`, `edge` and `hyp
 
 Creates the directory structure to hold your files for freqtrade.
 Will also create strategy and hyperopt examples for you to get started.
-Can be used multiple times - using `--reset` will reset the sample strategy and hyperopt files to their default state. 
+Can be used multiple times - using `--reset` will reset the sample strategy and hyperopt files to their default state.
 
 ```
 usage: freqtrade create-userdir [-h] [--userdir PATH] [--reset]
@@ -19,7 +19,7 @@ optional arguments:
 ```
 
 !!! Warning
-    Using `--reset` may result in loss of data, since this will overwrite all sample files without asking again.
+Using `--reset` may result in loss of data, since this will overwrite all sample files without asking again.
 
 ```
 ├── backtest_results
@@ -49,7 +49,7 @@ optional arguments:
 ```
 
 !!! Warning
-    Only vital questions are asked. Freqtrade offers a lot more configuration possibilities, which are listed in the [Configuration documentation](configuration.md#configuration-parameters)
+Only vital questions are asked. Freqtrade offers a lot more configuration possibilities, which are listed in the [Configuration documentation](configuration.md#configuration-parameters)
 
 ### Create config examples
 
@@ -73,7 +73,7 @@ The file will be named inline with your class name, and will not overwrite exist
 
 Results will be located in `user_data/strategies/<strategyclassname>.py`.
 
-``` output
+```output
 usage: freqtrade new-strategy [-h] [--userdir PATH] [-s NAME]
                               [--template {full,minimal,advanced}]
 
@@ -144,23 +144,23 @@ Common arguments:
 ```
 
 !!! Warning
-    Using these commands will try to load all python files from a directory. This can be a security risk if untrusted files reside in this directory, since all module-level code is executed.
+Using these commands will try to load all python files from a directory. This can be a security risk if untrusted files reside in this directory, since all module-level code is executed.
 
 Example: Search default strategies directories (within the default userdir).
 
-``` bash
+```bash
 freqtrade list-strategies
 ```
 
-Example: Search strategies  directory within the userdir.
+Example: Search strategies directory within the userdir.
 
-``` bash
+```bash
 freqtrade list-strategies --userdir ~/.freqtrade/
 ```
 
 Example: Search dedicated strategy path.
 
-``` bash
+```bash
 freqtrade list-strategies --strategy-path ~/.freqtrade/strategies/
 ```
 
@@ -177,7 +177,8 @@ optional arguments:
   -a, --all         Print all exchanges known to the ccxt library.
 ```
 
-* Example: see exchanges available for the bot:
+- Example: see exchanges available for the bot:
+
 ```
 $ freqtrade list-exchanges
 Exchanges available for Freqtrade:
@@ -249,9 +250,10 @@ zb               True     missing opt: fetchMyTrades
 ```
 
 !!! Note "missing opt exchanges"
-    Values with "missing opt:" might need special configuration (e.g. using orderbook if `fetchTickers` is missing) - but should in theory work (although we cannot guarantee they will).
+Values with "missing opt:" might need special configuration (e.g. using orderbook if `fetchTickers` is missing) - but should in theory work (although we cannot guarantee they will).
 
-* Example: see all exchanges supported by the ccxt library (including 'bad' ones, i.e. those that are known to not work with Freqtrade):
+- Example: see all exchanges supported by the ccxt library (including 'bad' ones, i.e. those that are known to not work with Freqtrade):
+
 ```
 $ freqtrade list-exchanges -a
 All exchanges supported by the ccxt library:
@@ -408,7 +410,7 @@ Common arguments:
 
 ```
 
-* Example: see the timeframes for the 'binance' exchange, set in the configuration file:
+- Example: see the timeframes for the 'binance' exchange, set in the configuration file:
 
 ```
 $ freqtrade list-timeframes -c config_binance.json
@@ -416,7 +418,8 @@ $ freqtrade list-timeframes -c config_binance.json
 Timeframes available for the exchange `binance`: 1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 6h, 8h, 12h, 1d, 3d, 1w, 1M
 ```
 
-* Example: enumerate exchanges available for Freqtrade and print timeframes supported by each of them:
+- Example: enumerate exchanges available for Freqtrade and print timeframes supported by each of them:
+
 ```
 $ for i in `freqtrade list-exchanges -1`; do freqtrade list-timeframes --exchange $i; done
 ```
@@ -488,22 +491,22 @@ Pairs/markets are sorted by its symbol string in the printed output.
 
 ### Examples
 
-* Print the list of active pairs with quote currency USD on exchange, specified in the default
-configuration file (i.e. pairs on the "Bittrex" exchange) in JSON format:
+- Print the list of active pairs with quote currency USD on exchange, specified in the default
+  configuration file (i.e. pairs on the "Bittrex" exchange) in JSON format:
 
 ```
 $ freqtrade list-pairs --quote USD --print-json
 ```
 
-* Print the list of all pairs on the exchange, specified in the `config_binance.json` configuration file
-(i.e. on the "Binance" exchange) with base currencies BTC or ETH and quote currencies USDT or USD, as the
-human-readable list with summary:
+- Print the list of all pairs on the exchange, specified in the `config_binance.json` configuration file
+  (i.e. on the "Binance" exchange) with base currencies BTC or ETH and quote currencies USDT or USD, as the
+  human-readable list with summary:
 
 ```
 $ freqtrade list-pairs -c config_binance.json --all --base BTC ETH --quote USDT USD --print-list
 ```
 
-* Print all markets on exchange "Kraken", in the tabular format:
+- Print all markets on exchange "Kraken", in the tabular format:
 
 ```
 $ freqtrade list-markets --exchange kraken --all
@@ -549,8 +552,8 @@ freqtrade test-pairlist --config config.json --quote USDT BTC
 ## Webserver mode
 
 !!! Warning "Experimental"
-    Webserver mode is an experimental mode to increase backesting and strategy development productivity.
-    There may still be bugs - so if you happen to stumble across these, please report them as github issues, thanks.
+Webserver mode is an experimental mode to increase backesting and strategy development productivity.
+There may still be bugs - so if you happen to stumble across these, please report them as github issues, thanks.
 
 Run freqtrade in webserver mode.
 Freqtrade will start the webserver and allow FreqUI to start and control backtesting processes.
@@ -588,7 +591,7 @@ Allows you to show previous backtest results.
 Adding `--show-pair-list` outputs a sorted pair list you can easily copy/paste into your configuration (omitting bad pairs).
 
 ??? Warning "Strategy overfitting"
-    Only using winning pairs can lead to an overfitted strategy, which will not work well on future data. Make sure to extensively test your strategy in dry-run before risking real money.
+Only using winning pairs can lead to an overfitted strategy, which will not work well on future data. Make sure to extensively test your strategy in dry-run before risking real money.
 
 ```
 usage: freqtrade backtesting-show [-h] [-v] [--logfile FILE] [-V] [-c PATH]
@@ -687,17 +690,19 @@ Common arguments:
 ```
 
 !!! Note
-    `hyperopt-list` will automatically use the latest available hyperopt results file.
-    You can override this using the `--hyperopt-filename` argument, and specify another, available filename (without path!).
+`hyperopt-list` will automatically use the latest available hyperopt results file.
+You can override this using the `--hyperopt-filename` argument, and specify another, available filename (without path!).
 
 ### Examples
 
 List all results, print details of the best result at the end:
+
 ```
 freqtrade hyperopt-list
 ```
 
 List only epochs with positive profit. Do not print the details of the best epoch, so that the list can be iterated in a script:
+
 ```
 freqtrade hyperopt-list --profitable --no-details
 ```
@@ -748,8 +753,8 @@ Common arguments:
 ```
 
 !!! Note
-    `hyperopt-show` will automatically use the latest available hyperopt results file.
-    You can override this using the `--hyperopt-filename` argument, and specify another, available filename (without path!).
+`hyperopt-show` will automatically use the latest available hyperopt results file.
+You can override this using the `--hyperopt-filename` argument, and specify another, available filename (without path!).
 
 ### Examples
 
@@ -806,6 +811,6 @@ Common arguments:
 
 Print trades with id 2 and 3 as json
 
-``` bash
+```bash
 freqtrade show-trades --db-url sqlite:///tradesv3.sqlite --trade-ids 2 3 --print-json
 ```

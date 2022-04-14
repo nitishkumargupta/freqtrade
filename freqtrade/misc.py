@@ -120,6 +120,11 @@ def pair_to_filename(pair: str) -> str:
         pair = pair.replace(ch, '_')
     return pair
 
+def pair_to_filename_without_underscore(pair: str) -> str:
+    pair_name = pair.split("/")
+    pair = "".join(pair_name)
+    return pair
+
 
 def format_ms_time(date: int) -> str:
     """

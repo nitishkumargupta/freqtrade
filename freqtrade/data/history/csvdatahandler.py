@@ -59,7 +59,7 @@ class CSVDataHandler(IDataHandler):
         :param data: Dataframe containing OHLCV data
         :return: None
         """
-        filename = self._pair_data_filename(self._datadir, pair, timeframe)
+        filename = self._pair_to_filename_without_underscore(self._datadir, pair, timeframe)
         _data = data.copy()
         # Convert date to int
         _data['date'] = _data['date'].view(np.int64) // 1000 // 1000
@@ -82,7 +82,7 @@ class CSVDataHandler(IDataHandler):
                         all data where possible.
         :return: DataFrame with ohlcv data, or empty DataFrame
         """
-        filename = self._pair_data_filename(self._datadir, pair, timeframe)
+        filename = self._pair_to_filename_without_underscore(self._datadir, pair, timeframe)
         if not filename.exists():
             return DataFrame(columns=self._columns)
         try:
@@ -106,7 +106,7 @@ class CSVDataHandler(IDataHandler):
         :param timeframe: Timeframe (e.g. "5m")
         :return: True when deleted, false if file did not exist.
         """
-        filename = self._pair_data_filename(self._datadir, pair, timeframe)
+        filename = self._pair_to_filename_without_underscore(self._datadir, pair, timeframe)
         if filename.exists():
             filename.unlink()
             return True

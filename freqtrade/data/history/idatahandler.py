@@ -164,6 +164,12 @@ class IDataHandler(ABC):
         return filename
 
     @classmethod
+    def _pair_to_filename_without_underscore(cls, datadir: Path, pair: str, timeframe: str) -> Path:
+        pair_s = misc.pair_to_filename_without_underscore(pair)
+        filename = datadir.joinpath(f'{pair_s}.{cls._get_file_extension()}')
+        return filename
+
+    @classmethod
     def _pair_trades_filename(cls, datadir: Path, pair: str) -> Path:
         pair_s = misc.pair_to_filename(pair)
         filename = datadir.joinpath(f'{pair_s}-trades.{cls._get_file_extension()}')
